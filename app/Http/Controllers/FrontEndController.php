@@ -19,12 +19,12 @@ class FrontEndController extends Controller
         // If there is set date, find the doctors
         if (request('date')) {
             $formatDate = date('m-d-yy', strtotime(request('date')));
-//             $doctors = Appointment::where('date', $formatDate)->get(); , compact('doctors', 'formatDate')
-            return view('welcome');
+            $doctors = Appointment::where('date', $formatDate)->get();
+            return view('welcome', compact('doctors', 'formatDate'));
         };
         // Return all doctors avalable for today to the welcome page
-        $doctors = Appointment::where('date', date('m-d-yy'))->get();
-        return view('welcome', compact('doctors'));
+        // $doctors = Appointment::where('date', date('m-d-yy'))->get();, compact('doctors')
+        return view('welcome');
     }
 
     public function show($doctorId, $date)
